@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            background: #fff5f7;
+        }
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fancy-text {
+            font-family: 'Dancing Script', cursive;
+        }
+        .heart-float {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+            color: #ff4d6d;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .btn-bounce:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Slide 1: Welcome -->
+    <div id="slide-1" class="slide active p-8 text-center bg-gradient-to-br from-pink-100 to-red-100">
+        <div class="mb-6 text-6xl">✨</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-red-500 mb-4">Hey You!</h1>
+        <p class="text-xl text-gray-600 mb-8">I heard your day wasn't the best, so I made this just for you.</p>
+        <button onclick="nextSlide(2)" class="btn-bounce bg-red-400 text-white px-8 py-3 rounded-full font-semibold shadow-lg">Open Your Surprise</button>
+    </div>
+
+    <!-- Slide 2: Validation -->
+    <div id="slide-2" class="slide p-8 text-center">
+        <div class="max-w-md bg-white p-10 rounded-3xl shadow-xl relative">
+            <div class="fancy-text text-5xl text-pink-500 mb-6">It's Okay...</div>
+            <p class="text-lg leading-relaxed text-gray-600">
+                It's okay to have a bad day. It's okay to feel upset. 
+                Even the sun hides behind clouds sometimes, but it doesn't mean it's gone.
+            </p>
+            <div class="mt-8 space-x-4">
+                <button onclick="nextSlide(3)" class="text-pink-500 font-bold underline">Tell me more</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Reasons Why You're Awesome -->
+    <div id="slide-3" class="slide p-8 bg-white">
+        <h2 class="text-3xl font-bold text-red-400 mb-10">3 Reminders for Right Now:</h2>
+        <div class="grid gap-6 max-w-lg w-full">
+            <div class="bg-pink-50 p-6 rounded-2xl border-l-4 border-pink-400 shadow-sm">
+                <p class="font-bold text-pink-700">1. You are incredibly strong.</p>
+                <p class="text-pink-600 text-sm">You've handled 100% of your bad days so far.</p>
+            </div>
+            <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-400 shadow-sm">
+                <p class="font-bold text-orange-700">2. You make my life better.</p>
+                <p class="text-orange-600 text-sm">Just knowing you're in the world makes me smile.</p>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-400 shadow-sm">
+                <p class="font-bold text-blue-700">3. This is only temporary.</p>
+                <p class="text-blue-600 text-sm">Tomorrow is a brand new start.</p>
+            </div>
+        </div>
+        <button onclick="nextSlide(4)" class="mt-12 bg-red-400 text-white px-10 py-3 rounded-full shadow-lg">Keep going...</button>
+    </div>
+
+    <!-- Slide 4: Interactive Mood Booster -->
+    <div id="slide-4" class="slide p-8 text-center bg-pink-50">
+        <h2 class="text-2xl font-bold mb-6">Which do you need most?</h2>
+        <div class="grid grid-cols-2 gap-4 w-full max-w-xs">
+            <button onclick="boost('hug')" class="bg-white p-6 rounded-2xl shadow hover:bg-pink-100 transition">
+                <div class="text-3xl mb-2">🫂</div>
+                <span class="text-sm font-bold">Virtual Hug</span>
+            </button>
+            <button onclick="boost('laugh')" class="bg-white p-6 rounded-2xl shadow hover:bg-pink-100 transition">
+                <div class="text-3xl mb-2">🎈</div>
+                <span class="text-sm font-bold">A Distraction</span>
+            </button>
+            <button onclick="boost('food')" class="bg-white p-6 rounded-2xl shadow hover:bg-pink-100 transition">
+                <div class="text-3xl mb-2">🍕</div>
+                <span class="text-sm font-bold">Food Ideas</span>
+            </button>
+            <button onclick="boost('quiet')" class="bg-white p-6 rounded-2xl shadow hover:bg-pink-100 transition">
+                <div class="text-3xl mb-2">☁️</div>
+                <span class="text-sm font-bold">Soft Peace</span>
+            </button>
+        </div>
+        <div id="boost-msg" class="mt-8 h-12 text-pink-600 font-bold"></div>
+        <button onclick="nextSlide(5)" class="mt-8 text-gray-400 text-sm">One last thing...</button>
+    </div>
+
+    <!-- Slide 5: Final Love Note -->
+    <div id="slide-5" class="slide p-8 text-center bg-white relative">
+        <!-- Floating hearts via JS -->
+        <div class="fancy-text text-6xl text-red-500 mb-6">I Love You!</div>
+        <p class="text-xl text-gray-600 max-w-xs mb-8">
+            Take all the time you need to feel better. I'm right here whenever you want to talk. 
+        </p>
+        <div class="text-4xl">❤️🏠🧸</div>
+        <button onclick="nextSlide(1)" class="mt-12 text-xs uppercase tracking-widest text-gray-300">Restart Surprise</button>
+    </div>
+
+    <script>
+        function nextSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide-' + slideNumber).classList.add('active');
+            
+            if(slideNumber === 5) {
+                createHearts();
+            }
+        }
+
+        function boost(type) {
+            const msg = document.getElementById('boost-msg');
+            const responses = {
+                hug: "Sending a massive, warm 10-second hug your way! 🫂",
+                laugh: "Imagine a penguin trying to walk on ice. That's me trying to be cool without you! 🐧",
+                food: "Ice cream? Pizza? We're ordering whatever you want later. My treat! 🍟",
+                quiet: "Take a deep breath. In for 4... hold for 4... out for 4. You're safe. 🌊"
+            };
+            msg.innerText = responses[type];
+            msg.style.animation = 'none';
+            msg.offsetHeight; /* trigger reflow */
+            msg.style.animation = 'fadeIn 0.5s';
+        }
+
+        function createHearts() {
+            const container = document.getElementById('slide-5');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart-float text-2xl';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
